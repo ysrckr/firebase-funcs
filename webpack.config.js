@@ -4,10 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
 	mode: 'development',
 	entry: {
-		bundle: [
-			path.resolve(__dirname, 'src/js/index.js'),
-			path.resolve(__dirname, 'src/js/firebaseInitilizer.js'),
-		],
+		main: path.resolve(__dirname, 'src/js/index.js'),
+		second: path.resolve(__dirname, 'src/js/firebaseInitilizer.js'),
 	},
 	output: {
 		path: path.resolve(__dirname, 'public'),

@@ -32,6 +32,35 @@
 				<a class="sign-out">Sign Out</a>
 			</nav>
 		</header>
+		<!--Auth Modal START-->
+		<div class="auth open">
+			<!--Login Modal START-->
+			<div class="modal active">
+				<h2>Login</h2>
+				<form class="login">
+					<input type="text" name="email" placeholder="Email" />
+					<input type="password" name="password" placeholder="Password" />
+					<button>Login</button>
+					<p class="error"></p>
+				</form>
+				<div>No Account? <a class="switch">Register Instead</a></div>
+			</div>
+			<!--Login Modal END-->
+			<!--Register Modal START-->
+			<div class="modal">
+				<h2>Register</h2>
+				<form class="register">
+					<input type="text" name="name" placeholder="Name" />
+					<input type="text" name="email" placeholder="Email" />
+					<input type="password" name="password" placeholder="Password" />
+					<button>Register</button>
+					<p class="error"></p>
+				</form>
+				<div>Already have an account? <a class="switch">Login Instead</a></div>
+			</div>
+			<!--Register Modal END-->
+		</div>
+		<!--Auth Modal END-->
 		<!--Header END-->
 		<!--Section START-->
 		<section class="content">
@@ -47,6 +76,7 @@
 				</li>
 			</ul>
 			<!-- request list END -->
+			<button id="call">Say Hello</button>
 		</section>
 		<!--Section END-->
 	</body>
