@@ -1,23 +1,37 @@
-/* eslint-disable indent */
 const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+admin.initializeApp();
 
-// http request 1
+// Auth Trigger New User Sign Up
 
-exports.randomNumber = functions.https.onRequest((req, res) => {
-  const number = Math.round(Math.random() * 100);
-  res.send(number.toString());
+exports.newUserSignUp = functions.auth.user().onCreate((user) => {
+  // For background triggers you ust return a value/promise
+  return admin.firestore().collection("users").doc(user.uid).set({
+    email: user.email,
+    upvotedOn: [],
+  });
+});
+// Auth Trigger User Delete
+exports.userDeleted = functions.auth.user().onDelete((user) => {
+  // For background triggers you ust return a value/promise
+  const doc = admin.firestore().collection("users").doc(user.uid);
+  return doc.delete();
 });
 
-// http request 2
-
-/* exports.randomNumber = functions.https.onRequest((req, res) => {
-  res.redirect("https://www.google.com");
-}); */
-
-// http callable function
-
-exports.sayHello = functions.https.onCall((data, context) => {
-    // eslint-disable-next-line quotes
-    return `Hello ninja`;
+// http callable function (adding a request)
+exports.addRequest = functions.https.onCall((data, context) => {
+  if (!context.auth) {
+    throw new functions
+        .https
+        .HttpsError("unauthenticated", "User not logged in");
+  }
+  if (data.text.lenght > 30) {
+    throw new functions
+        .https
+        .HttpsError("invalid-argument", "Request text is too long");
+  }
+  return admin.firestore().collection("requests").add({
+    text: data.text,
+    upvotes: 0,
+  });
 });
-

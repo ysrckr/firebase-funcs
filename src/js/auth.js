@@ -6,7 +6,7 @@ import {
 	getAuth,
 } from 'firebase/auth';
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 const authSwitchLinks = document.querySelectorAll('.switch');
 const authModals = document.querySelectorAll('.auth .modal');
@@ -33,12 +33,12 @@ registerForm.addEventListener('submit', async e => {
 		const userCredentials = await createUserWithEmailAndPassword(
 			auth,
 			email,
-			password
+			password,
 		);
-		const user = await userCredentials.user;
+		await userCredentials.user;
 		registerForm.reset();
 	} catch (err) {
-		const errorCode = err.code;
+		//const errorCode = err.code;
 		const errorMessage = err.message;
 		registerForm.querySelector('.error').textContent = errorMessage;
 	}
@@ -53,12 +53,12 @@ loginForm.addEventListener('submit', async e => {
 		const userCredentials = await signInWithEmailAndPassword(
 			auth,
 			email,
-			password
+			password,
 		);
-		const user = await userCredentials.user;
+		await userCredentials.user;
 		loginForm.reset();
 	} catch (err) {
-		const errorCode = err.code;
+		//const errorCode = err.code;
 		const errorMessage = err.message;
 		loginForm.querySelector('.error').textContent = errorMessage;
 	}

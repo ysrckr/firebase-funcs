@@ -1,10 +1,13 @@
 import '../css/styles.css';
+import app from './firebaseInitilizer';
+import { auth } from './auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 const functions = getFunctions();
+
 const requestModal = document.querySelector('.new-request');
 const requestLink = document.querySelector('.add-request');
-const button = document.querySelector('#call');
+const requestForm = document.querySelector('.request-form');
 
 requestLink.addEventListener('click', () => {
 	requestModal.classList.add('open');
@@ -16,18 +19,19 @@ requestModal.addEventListener('click', e => {
 	}
 });
 
-button.addEventListener('click', async () => {
-	//get function reference
-	const sayHello = httpsCallable(functions, 'sayHello');
-	//invoke function
+// Add a new request
+requestForm.addEventListener('submit', async e => {
+	e.preventDefault();
+	const addRequest = httpsCallable(functions, 'addRequest', auth);
 	try {
-		// say Hello funtion
-		const result = await sayHello();
-		//log result
+		const result = await addRequest({
+			text: requestForm.request.value,
+		});
 		console.log(result.data);
-	} catch (err) {
-		const code = err.code;
-		const message = err.message;
-		const details = err.details;
+		requestForm.querySelector('.error').textContent = '';
+	} catch (error) {
+		requestForm.querySelector('.error').textContent = error.message;
 	}
+	requestForm.reset();
+	requestModal.classList.remove('open');
 });
