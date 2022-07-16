@@ -1,11 +1,12 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
 	entry: {
 		main: path.resolve(__dirname, 'src/js/index.js'),
-		second: path.resolve(__dirname, 'src/js/firebaseInitilizer.js'),
+		firebaseInitilizer: path.resolve(__dirname, 'src/js/firebaseInitilizer.js'),
+		auth: path.resolve(__dirname, 'src/js/auth.js'),
 	},
 	output: {
 		path: path.resolve(__dirname, 'public'),
@@ -69,4 +70,4 @@ module.exports = {
 		compress: true, // enable gzip compression
 		historyApiFallback: true,
 	},
-}
+};

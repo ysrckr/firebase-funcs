@@ -9,8 +9,7 @@
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="css/styles.css" />
-	<script defer src="mainc1a84b029a2a2574ab89.js"></script><script defer src="second08b7d9cd91229862d8c7.js"></script></head>
+	<script defer src="main9d3c1785c45d879c18cc.js"></script><script defer src="firebaseInitilizer08b7d9cd91229862d8c7.js"></script><script defer src="autha41835ca12232ea95788.js"></script></head>
 	<body>
 		<!-- new request modal START -->
 		<div class="new-request">
@@ -32,6 +31,35 @@
 				<a class="sign-out">Sign Out</a>
 			</nav>
 		</header>
+		<!--Auth Modal START-->
+		<div class="auth open">
+			<!--Login Modal START-->
+			<div class="modal active">
+				<h2>Login</h2>
+				<form class="login">
+					<input type="text" name="email" placeholder="Email" />
+					<input type="password" name="password" placeholder="Password" />
+					<button>Login</button>
+					<p class="error"></p>
+				</form>
+				<div>No Account? <a class="switch">Register Instead</a></div>
+			</div>
+			<!--Login Modal END-->
+			<!--Register Modal START-->
+			<div class="modal">
+				<h2>Register</h2>
+				<form class="register">
+					<input type="text" name="name" placeholder="Name" />
+					<input type="text" name="email" placeholder="Email" />
+					<input type="password" name="password" placeholder="Password" />
+					<button>Register</button>
+					<p class="error"></p>
+				</form>
+				<div>Already have an account? <a class="switch">Login Instead</a></div>
+			</div>
+			<!--Register Modal END-->
+		</div>
+		<!--Auth Modal END-->
 		<!--Header END-->
 		<!--Section START-->
 		<section class="content">
