@@ -35,18 +35,39 @@ exports.addRequest = functions.https.onCall((data, context) => {
     upvotes: 0,
   });
 });
-
+// upVote callable function
 exports.upVote = functions.https.onCall((data, context) => {
+  // User must be logged in
   if (!context.auth) {
     throw new functions
         .https
         .HttpsError("unauthenticated", "User not logged in");
   }
-  const doc = admin.firestore().collection("requests").doc(data.id);
-  return doc.update({
-    upvotes: admin.firestore.FieldValue.increment(1),
+  // Get the user
+  const user = admin.firestore().collection("users").doc(context.auth.uid);
+  // Get the request
+  const request = admin.firestore().collection("requests").doc(data.id);
+  return user.get().then((doc) => {
+  // Check if user has already upvoted
+    if (doc.data().upvotedOn.includes(data.id)) {
+      throw new functions
+          .https
+          .HttpsError("invalid-argument", "User has already upvoted");
+    }
+    // Add the request to the user's upvotedOn array
+    return user.update({
+      upvotedOn: [...doc.data().upvotedOn, data.id],
+    });
+  }).then(() => {
+    // Add one to the request's upvotes
+    return request.update({
+      upvotes: admin.firestore.FieldValue.increment(1),
+    });
+  }).catch((error) => {
+    console.log(error);
   });
 });
+
 
 exports.deleteRequest = functions.https.onCall((data, context) => {
   if (!context.auth) {

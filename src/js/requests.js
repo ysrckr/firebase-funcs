@@ -26,21 +26,23 @@ createApp({
 		async upVote(id) {
 			const upVote = httpsCallable(functions, 'upVote', auth);
 			try {
-				const result = await upVote({
+				await upVote({
 					id,
 				});
-				console.log(result.data);
 			} catch (error) {
-				console.log(error);
+				console.log(error.message);
 			}
-			const updateState = id => {
-				const index = this.requests.findIndex(
-					request => request.id === id,
-				);
-				this.requests[index].upvotes++;
-				nextTick();
-			};
-			updateState(id);
+			const ref = await getDocs(collection(db, 'requests'));
+			ref.forEach(doc => {
+				this.requests = [
+					{
+						text: doc.data().text,
+						upvotes: doc.data().upvotes,
+						id: doc.id,
+					},
+				];
+			});
+			await nextTick();
 		},
 		async deleteRequest(id) {
 			const deleteRequest = httpsCallable(
@@ -49,21 +51,14 @@ createApp({
 				auth,
 			);
 			try {
-				const result = await deleteRequest({
+				await deleteRequest({
 					id,
 				});
-				console.log(result.data);
 			} catch (error) {
 				console.log(error);
 			}
-			const updateState = id => {
-				const index = this.requests.findIndex(
-					request => request.id === id,
-				);
-				this.requests.splice(index, 1);
-				nextTick();
-			};
-			updateState(id);
+			this.requests = this.requests.filter(request => request.id !== id);
+			await nextTick();
 		},
 	},
 }).mount('#component');
