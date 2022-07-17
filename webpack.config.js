@@ -20,6 +20,16 @@ module.exports = {
 	},
 	experiments: {
 		topLevelAwait: true,
+		buildHttp: {
+			allowedUris: [
+				'https://unpkg.com/preact?module',
+				'https://unpkg.com/htm?module',
+			],
+			cacheLocation: path.resolve(
+				__dirname,
+				'node_modules/.cache/http-build-cache',
+			),
+		},
 	},
 	module: {
 		rules: [

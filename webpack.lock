@@ -1,0 +1,5 @@
+{
+  "https://unpkg.com/htm?module": { "resolved": "https://unpkg.com/htm@3.1.1/dist/htm.module.js?module", "integrity": "sha512-KnnAaVhnp2uo13tJbl1S0nmxKMVqgYdz9ZWDEPROYk3p8rRWTXkYtWuoZvOhRA0PK2lbbQvjZ6uZ2AutRF8CsA==", "contentType": "application/javascript; charset=utf-8" },
+  "https://unpkg.com/preact?module": { "resolved": "https://unpkg.com/preact@10.10.0/dist/preact.module.js?module", "integrity": "sha512-9PZD8kIsWccks8XG/tV6bklb8lsaZ4niqGs4y0IzKZIHA+XRONWUC3bPaZ2pRVkOkmLCTpgEhSurxyGGsnLPTw==", "contentType": "application/javascript; charset=utf-8" },
+  "version": 1
+}

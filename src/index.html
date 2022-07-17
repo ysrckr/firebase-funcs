@@ -78,11 +78,11 @@
 		<section class="content">
 			<h1>Tutorial Requests</h1>
 			<!-- request list START -->
-			<ul class="request-list">
-				<li>
-					<span class="text">Laravel 6 Tutorial</span>
+			<ul class="request-list" id="component">
+				<li v-for="request in requests">
+					<span class="text">{{request.text}}</span>
 					<div>
-						<span class="votes">125</span>
+						<span class="votes">{{request.upvotes}}</span>
 						<i class="material-icons upvote">arrow_upward</i>
 					</div>
 				</li>
