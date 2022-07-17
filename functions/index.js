@@ -35,3 +35,25 @@ exports.addRequest = functions.https.onCall((data, context) => {
     upvotes: 0,
   });
 });
+
+exports.upVote = functions.https.onCall((data, context) => {
+  if (!context.auth) {
+    throw new functions
+        .https
+        .HttpsError("unauthenticated", "User not logged in");
+  }
+  const doc = admin.firestore().collection("requests").doc(data.id);
+  return doc.update({
+    upvotes: admin.firestore.FieldValue.increment(1),
+  });
+});
+
+exports.deleteRequest = functions.https.onCall((data, context) => {
+  if (!context.auth) {
+    throw new functions
+        .https
+        .HttpsError("unauthenticated", "User not logged in");
+  }
+  const doc = admin.firestore().collection("requests").doc(data.id);
+  return doc.delete();
+});

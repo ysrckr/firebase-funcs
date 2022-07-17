@@ -83,7 +83,16 @@
 					<span class="text">{{request.text}}</span>
 					<div>
 						<span class="votes">{{request.upvotes}}</span>
-						<i class="material-icons upvote">arrow_upward</i>
+						<i
+							class="material-icons upvote"
+							@click="upVote(request.id)"
+							>arrow_upward</i
+						>
+						<i
+							class="material-icons trash"
+							@click="deleteRequest(request.id)"
+							>delete</i
+						>
 					</div>
 				</li>
 			</ul>

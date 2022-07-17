@@ -9,7 +9,7 @@
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
 		/>
-	<script defer src="maind66e21aa843a3f11d402.js"></script><script defer src="firebaseInitilizer08b7d9cd91229862d8c7.js"></script><script defer src="authf223e20139d794e58e3a.js"></script><script defer src="requestsd7728185f289c69d0de5.js"></script></head>
+	<script defer src="main0e6b04c6514e6ca0fd80.js"></script><script defer src="firebaseInitilizer08b7d9cd91229862d8c7.js"></script><script defer src="authf223e20139d794e58e3a.js"></script><script defer src="requests895d5577f7b488b08f34.js"></script></head>
 	<body>
 		<!-- new request modal START -->
 		<div class="new-request">
@@ -78,7 +78,24 @@
 		<section class="content">
 			<h1>Tutorial Requests</h1>
 			<!-- request list START -->
-			<ul class="request-list" id="component"></ul>
+			<ul class="request-list" id="component">
+				<li v-for="request in requests">
+					<span class="text">{{request.text}}</span>
+					<div>
+						<span class="votes">{{request.upvotes}}</span>
+						<i
+							class="material-icons upvote"
+							@click="upVote(request.id)"
+							>arrow_upward</i
+						>
+						<i
+							class="material-icons trash"
+							@click="deleteRequest(request.id)"
+							>delete</i
+						>
+					</div>
+				</li>
+			</ul>
 			<!-- request list END -->
 		</section>
 		<!--Section END-->

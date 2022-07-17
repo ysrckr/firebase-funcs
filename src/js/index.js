@@ -27,11 +27,11 @@ requestForm.addEventListener('submit', async e => {
 		const result = await addRequest({
 			text: requestForm.request.value,
 		});
-		console.log(result.data);
 		requestForm.querySelector('.error').textContent = '';
 	} catch (error) {
 		requestForm.querySelector('.error').textContent = error.message;
 	}
 	requestForm.reset();
 	requestModal.classList.remove('open');
+	location.reload();
 });
