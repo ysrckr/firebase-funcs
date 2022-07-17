@@ -5,14 +5,21 @@ module.exports = {
 	mode: 'development',
 	entry: {
 		main: path.resolve(__dirname, 'src/js/index.js'),
-		firebaseInitilizer: path.resolve(__dirname, 'src/js/firebaseInitilizer.js'),
+		firebaseInitilizer: path.resolve(
+			__dirname,
+			'src/js/firebaseInitilizer.js',
+		),
 		auth: path.resolve(__dirname, 'src/js/auth.js'),
+		requests: path.resolve(__dirname, 'src/js/requests.js'),
 	},
 	output: {
 		path: path.resolve(__dirname, 'public'),
 		filename: '[name][contenthash].js',
 		assetModuleFilename: '[name][ext]',
 		clean: true,
+	},
+	experiments: {
+		topLevelAwait: true,
 	},
 	module: {
 		rules: [
